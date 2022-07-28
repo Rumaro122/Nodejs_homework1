@@ -13,9 +13,10 @@ const router = express.Router();
 router.get("/:postId", async (req, res) => {  //댓글 전체 조회
     const { postId } = req.params;
 
-	const [comment] = await Comments.find({postId : postId}).sort({ commentDate: -1 }).select('commentDate comment');
+	const comments = await Comments.find({postId: postId}).sort({ commentDate: -1 }).select('commentDate comment');
+	
     res.json({
-        comment,
+        comments,
     });
 });
 
